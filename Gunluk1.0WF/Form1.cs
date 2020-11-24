@@ -48,6 +48,8 @@ namespace Gunluk1._0WF
                 }
                 lstNotlar.Visible = true;
                 lstAranan.Visible = false;
+                txtBaslik.Clear();
+                rtxtIcerik.Clear();
             }
         }
 
@@ -94,10 +96,21 @@ namespace Gunluk1._0WF
             string icerik = rtxtIcerik.Text.Trim();
             using (var con = BaglantiOlustur())
             {
+                if (baslik == "" || icerik == "")
+                {
+                    var cmd = new SqlCommand("INSERT INTO Notlar(Baslik, Icerik) VALUES(@p1,@p2)", con);
+                    cmd.Parameters.AddWithValue("@p1", txtBaslik.Text = "Yeni Not");
+                    cmd.Parameters.AddWithValue("@p2", rtxtIcerik.Text = "Yeni İçerik");
+                    cmd.ExecuteNonQuery();
+                }
+                else
+                {
+
                 var cmd = new SqlCommand("INSERT INTO Notlar(Baslik, Icerik) VALUES(@p1,@p2)", con);
                 cmd.Parameters.AddWithValue("@p1", baslik);
                 cmd.Parameters.AddWithValue("@p2", icerik);
                 cmd.ExecuteNonQuery();
+                }
 
             }
             NotlariListele();
@@ -148,6 +161,28 @@ namespace Gunluk1._0WF
         private void btnAra_Click(object sender, EventArgs e)
         {
 
+            NotlariAra();
+
+            #region yöntem1
+            //string aranan = txtAra.Text.Trim();
+            //int seciliNotIndex = lstNotlar.SelectedIndex;
+            //if (seciliNotIndex < 0)
+            //{
+            //    return;
+            //}
+            //using (var con = BaglantiOlustur())
+            //{
+            //    var cmd = new SqlCommand("SELECT * FROM Notlar WHERE Baslik LIKE '%'+@ara+'%' OR Icerik LIKE '%'+@ara+'%'", con);
+            //    cmd.Parameters.AddWithValue("@ara", aranan);
+            //    var sdr = cmd.ExecuteReader();
+            //    notlar.Clear();
+            //    NotlariListele();
+            //} 
+            #endregion
+        }
+
+        private void NotlariAra()
+        {
             string arananKelime = txtAra.Text;
             using (var con = BaglantiOlustur())
             {
@@ -168,31 +203,14 @@ namespace Gunluk1._0WF
                 lstAranan.Visible = true;
                 btnAramaIptal.Visible = true;
             }
-
-            #region yöntem1
-            //string aranan = txtAra.Text.Trim();
-            //int seciliNotIndex = lstNotlar.SelectedIndex;
-            //if (seciliNotIndex < 0)
-            //{
-            //    return;
-            //}
-            //using (var con = BaglantiOlustur())
-            //{
-            //    var cmd = new SqlCommand("SELECT * FROM Notlar WHERE Baslik LIKE '%'+@ara+'%' OR Icerik LIKE '%'+@ara+'%'", con);
-            //    cmd.Parameters.AddWithValue("@ara", aranan);
-            //    var sdr = cmd.ExecuteReader();
-            //    notlar.Clear();
-            //    NotlariListele();
-            //} 
-            #endregion
         }
-
-
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
 
             NotlariKaydet();
+            txtBaslik.Clear();
+            rtxtIcerik.Clear();
             Text = "Gunluk1.0";
         }
 
@@ -231,6 +249,9 @@ namespace Gunluk1._0WF
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (lstNotlar.Items.Count == 0)
+                return;
+            
             int seciliNotIndex = lstNotlar.SelectedIndex;
             Notlar n = notlar[seciliNotIndex];
             if (rtxtIcerik.Text != n.Icerik || txtBaslik.Text != n.Baslik)
@@ -278,6 +299,10 @@ namespace Gunluk1._0WF
 
         private void txtBaslik_TextChanged(object sender, EventArgs e)
         {
+            if (lstNotlar.Items.Count == 0)
+            {
+                return;
+            }
             int seciliNotIndeks = lstNotlar.SelectedIndex;
             Notlar n = notlar[seciliNotIndeks];
             if (n.Baslik != txtBaslik.Text)
@@ -292,6 +317,10 @@ namespace Gunluk1._0WF
 
         private void rtxtIcerik_TextChanged(object sender, EventArgs e)
         {
+            if (lstNotlar.Items.Count == 0)
+            {
+                return;
+            }
             int seciliNotIndeks = lstNotlar.SelectedIndex;
             Notlar n = notlar[seciliNotIndeks];
             if (n.Icerik != rtxtIcerik.Text)
@@ -302,6 +331,11 @@ namespace Gunluk1._0WF
             {
                 Text = "Gunluk1.0";
             }
+        }
+
+        private void txtAra_TextChanged(object sender, EventArgs e)
+        {
+            NotlariAra();
         }
     }
 }

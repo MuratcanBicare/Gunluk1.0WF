@@ -56,7 +56,7 @@
             // 
             this.txtBaslik.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBaslik.Location = new System.Drawing.Point(548, 78);
-            this.txtBaslik.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtBaslik.Margin = new System.Windows.Forms.Padding(6);
             this.txtBaslik.Name = "txtBaslik";
             this.txtBaslik.Size = new System.Drawing.Size(893, 29);
             this.txtBaslik.TabIndex = 1;
@@ -68,7 +68,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtxtIcerik.Location = new System.Drawing.Point(548, 129);
-            this.rtxtIcerik.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rtxtIcerik.Margin = new System.Windows.Forms.Padding(6);
             this.rtxtIcerik.Name = "rtxtIcerik";
             this.rtxtIcerik.Size = new System.Drawing.Size(893, 559);
             this.rtxtIcerik.TabIndex = 2;
@@ -79,7 +79,7 @@
             // 
             this.btnKaydet.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnKaydet.Location = new System.Drawing.Point(548, 702);
-            this.btnKaydet.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnKaydet.Margin = new System.Windows.Forms.Padding(6);
             this.btnKaydet.Name = "btnKaydet";
             this.btnKaydet.Size = new System.Drawing.Size(424, 91);
             this.btnKaydet.TabIndex = 3;
@@ -91,7 +91,7 @@
             // 
             this.btnSil.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnSil.Location = new System.Drawing.Point(1021, 702);
-            this.btnSil.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnSil.Margin = new System.Windows.Forms.Padding(6);
             this.btnSil.Name = "btnSil";
             this.btnSil.Size = new System.Drawing.Size(424, 91);
             this.btnSil.TabIndex = 4;
@@ -102,7 +102,7 @@
             // btnEkle
             // 
             this.btnEkle.Location = new System.Drawing.Point(187, 65);
-            this.btnEkle.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnEkle.Margin = new System.Windows.Forms.Padding(6);
             this.btnEkle.Name = "btnEkle";
             this.btnEkle.Size = new System.Drawing.Size(50, 42);
             this.btnEkle.TabIndex = 5;
@@ -141,6 +141,7 @@
             this.txtAra.Name = "txtAra";
             this.txtAra.Size = new System.Drawing.Size(180, 29);
             this.txtAra.TabIndex = 8;
+            this.txtAra.TextChanged += new System.EventHandler(this.txtAra_TextChanged);
             // 
             // btnAra
             // 
@@ -194,7 +195,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lstAranan);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
